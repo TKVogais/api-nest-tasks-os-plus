@@ -1,0 +1,93 @@
+# Projeto API de Tarefas
+
+Este projeto é uma API REST para gerenciamento de tarefas para o teste prático para a vaga de Desenvolvedor Full Stack, com autenticação, usando NestJS no backend e PostgreSQL como banco de dados.
+
+---
+
+## 1. Pré-requisitos
+
+Antes de começar, certifique-se de ter instalado em sua máquina:
+
+- [Node.js](https://nodejs.org/) (versão 16 ou superior recomendada)  
+- [npm](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)  
+- [PostgreSQL](https://www.postgresql.org/) (versão 12 ou superior recomendada)  
+- [Docker](https://www.docker.com/get-started) e [Docker Compose](https://docs.docker.com/compose/install/)
+
+---
+
+## 2. Instalação
+
+1. Clone este repositório:
+
+git clone https://github.com/seuusuario/seuprojeto.git
+cd seuprojeto
+
+## 3. Instalação das Dependências
+
+npm install
+# ou
+yarn install
+
+## 4. Docker Compose
+
+1. Schema do Arquivo (caso não esteja presente, ou deseje mudar os dados)
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: task_management_api_db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: task-management-api
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: teste1234567
+
+## 5. Variáveis de Ambiente
+
+1. Crie o arquivo .env ou insira na aba de variáveis de ambiente da sua hospedagem
+
+DATABASE_HOST=localhost ou a URL onde o servidor está hospedado
+DATABASE_PORT=5432 ou a porta do seu servidor
+DATABASE_USER=postgres (usuario definido no Docker Compose) 
+DATABASE_PASSWORD=teste1234567 (senha definido no Docker Compose)
+DATABASE_NAME=task-management-api (nome do banco de dados definido no Docker Compose)
+JWT_SECRET= Ex: ae7d5c76f4a24f9ea6a74d8a1c7fb2e8b8c0dce7c3d06ffbb62f8d2ab9fd674a
+JWT_EXPIRATION_TIME=30m
+PORT=4000
+
+## 6. Execução dos Serviços
+
+1. docker-compose up -d (Para inicializar o container do banco de dados - PostgreSQL)
+
+2. migrations do banco de dados
+
+   npm run migration:run (Para executar as migrations do banco de dados)
+
+3. npm run start:dev 
+    # ou
+   yarn start:dev
+
+4. O backend estará disponível em http://localhost:4000 e o PostgreSQL rodando na porta 5432.
+
+## 7. Documentação da API (Swagger)
+
+1. Disponível em http://localhost:4000/api
+
+## 8. Decisões Técnicas
+
+1. NestJS: Requisito obrigatório do teste, arquitetura modular, suporte nativo a TypeScript, fácil integração com Swagger e validação.
+
+2. PostgreSQL: banco relacional robusto para integridade e performance.
+
+3. Swagger: Requisito opcional do teste, documentação interativa e automática da API.
+
+4. Requisito obrigatório do teste, class-validator: validação de dados de entrada com mensagens claras.
+
+5. JWT (Json Web Token): Requisito obrigatório do teste, autenticação segura e stateless.
+
+6. Guards: Requisito obrigatório do teste, proteção das rotas com autenticação.
+
+7. DTOs: Requisito obrigatório do teste, separação clara entre dados, validação e regras de negócio.
+
+8. Docker: facilidade para setup de ambiente e deploy consistente.
